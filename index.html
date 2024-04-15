@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tu Aplicación</title>
+  <style>
+    /* Estilos para la barra de navegación */
+    .navbar {
+      background-color: green;
+      color: white;
+      padding: 10px;
+      text-align: center; /* Alinea los elementos al centro */
+    }
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      margin: 0 10px; /* Añade espacio entre los enlaces */
+    }
+
+    /* Estilos para el título */
+    .title {
+      text-align: center;
+      color: green;
+    }
+
+    /* Estilos para las cards */
+    .cards-container {
+      text-align: center; /* Alinea las cards al centro */
+    }
+
+    .card {
+      display: inline-block; /* Muestra las cards en línea */
+      margin: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+      position: relative;
+      width: calc(25% - 20px); /* Ajusta el ancho de las cards */
+    }
+
+    .card img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* Estilos para el corazón */
+    .heart {
+      width: 30px;
+      height: 30px;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <a href="/">Home</a> | <a href="/src/Favorites.js">Favoritos</a>
+  </div>
+
+  <h1 class="title">Natural Pic</h1>
+
+  <div class="cards-container">
+    <!-- Se generarán las cards dinámicamente con JavaScript -->
+  </div>
+
+  <script>
+    // Función para crear una nueva card con una imagen y un corazón
+    function createCard(imageUrl, imageId) {
+      const card = document.createElement('div');
+      card.classList.add('card');
+
+      const img = document.createElement('img');
+      img.src = imageUrl;
+      img.alt = 'Imagen relacionada al medio ambiente';
+      card.appendChild(img);
+
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.setAttribute('data-id', imageId); // Se guarda el ID de la imagen en el corazón
+      card.appendChild(heart);
+
+      return card;
+    }
+
+    // Función para marcar/desmarcar una imagen como favorita
+    function toggleFavorite(event) {
+      const heart = event.target;
+      heart.classList.toggle('filled');
+    }
+
+    // Obtener el contenedor de las cards
+    const cardsContainer = document.querySelector('.cards-container');
+
+    // Simular la obtención de imágenes de Pexels (sustituye con tu lógica)
+    const photos = [
+      { id: 1, url: 'https://www.example.com/image1.jpg' },
+      { id: 2, url: 'https://www.example.com/image2.jpg' },
+      // Agrega más imágenes según sea necesario
+    ];
+
+    // Generar las cards para cada imagen
+    photos.forEach(photo => {
+      const card = createCard(photo.url, photo.id);
+      card.querySelector('.heart').addEventListener('click', toggleFavorite);
+      cardsContainer.appendChild(card);
+    });
+  </script>
+</body>
+</html>
