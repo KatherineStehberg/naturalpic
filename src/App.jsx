@@ -11,9 +11,9 @@ const App = () => {
   const [photos, setPhotos] = useState([]);
 
   useEffect(() => {
-    const fetchPhotos = async () => {
+    const fetchCuratedPhotos = async () => {
       try {
-        const response = await fetch(`${endpoint}/photos`, {
+        const response = await fetch(`${endpoint}/curated?page=1&per_page=40`, {
           headers: {
             Authorization: apiKey
           }
@@ -21,11 +21,11 @@ const App = () => {
         const data = await response.json();
         setPhotos(data.photos);
       } catch (error) {
-        console.error('Error fetching photos:', error);
+        console.error('Error fetching curated photos:', error);
       }
     };
 
-    fetchPhotos();
+    fetchCuratedPhotos();
   }, []);
 
   return (
@@ -41,5 +41,4 @@ const App = () => {
 };
 
 export default App;
-
 
